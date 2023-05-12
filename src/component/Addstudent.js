@@ -1,7 +1,9 @@
-import React, { useContext, useState } from 'react'
+import React, { useContext, useState } from 'react';
+import { useHistory } from 'react-router-dom';
 import NoteContext from '../context/noteContext';
 
 const Addstudent = (props) => {
+    const history = useHistory();
     const notecontext = useContext(NoteContext);
     const { addStudent } = notecontext;
     const [addstudent, setStudent] = useState({ firstname: "", lastname: "", email: "", mobileNo: "", collegeId: "" });
@@ -17,7 +19,8 @@ const Addstudent = (props) => {
 
     }
     return (
-        <div className="container my-3">
+    <>
+        {sessionStorage.getItem("token")?<div className="container my-3">
             <h1>Add a Student</h1>
             <form  onSubmit={handleClick} className='my-3'>
                 <div className="mb-3">
@@ -44,7 +47,8 @@ const Addstudent = (props) => {
 
                 <button type="submit" disabled={addstudent.firstname.length<5 ||addstudent.lastname.length<5} className="btn btn-primary" >Submit</button>
             </form>
-        </div>
+        </div>:history.push("/login")}
+        </>
     )
 }
 

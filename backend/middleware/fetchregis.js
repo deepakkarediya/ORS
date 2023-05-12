@@ -12,7 +12,10 @@ const fetchregis = (req, res, next) => {
         const data = jwt.verify(token, JWT_SECRET);
         // console.log(data);
         req.regis1 = data.regis;
-        next();
+        if(data){
+
+            next();
+        }
     } catch (error) {
         res.status(401).send({ error: "Please authenticate using a valid token" })
     }

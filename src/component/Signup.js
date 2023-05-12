@@ -18,15 +18,17 @@ const Signup = (props) => {
     });
     const json = await response.json()
     console.log(json);
+    if(!json.success){
+    
+      props.showAlert(json.error, "danger");
+    }
     if (json.success) {
       //save the auth token and redirect
       // localStorage.setItem("token", json.authtoken);
       props.showAlert("SignUp successfully", "success");
       history.push("/login")
     }
-    else {
-      props.showAlert("Invalid details", "danger");
-    }
+    
   }
   const onChange = (e) => {
     setCredentials({ ...credentials, [e.target.name]: e.target.value });

@@ -2,6 +2,8 @@ import React, { useContext, useEffect, useRef, useState } from 'react'
 import NoteContext from '../context/noteContext';
 import { useHistory } from 'react-router-dom';
 const Studentlist = (props) => {
+  
+  
   const notecontext = useContext(NoteContext);
   const history = useHistory();
   const { studentdata, fetchStudent, deleteStudent, updateStudent } = notecontext;
@@ -83,10 +85,8 @@ const Studentlist = (props) => {
         </div>
       </div>
 
-      <div>
-       
-       
-        <table className="table table-success my-5">
+      <div>      
+          <table className="table table-success my-5">
           <thead className="table-dark">
             <tr >
               <th scope="col">Id</th>
@@ -123,4 +123,4 @@ const Studentlist = (props) => {
   )
 }
 
-export default Studentlist
+export default Studentlist;

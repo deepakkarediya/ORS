@@ -4,6 +4,7 @@ import { useHistory } from 'react-router-dom';
 const Login = (props) => {
 
     const [credentials, setCredentials] = useState({ email: "", password: "" })
+    const [error, seterror] = useState([])
 
     const history = useHistory()
     const handleSubmit = async (e) => {
@@ -16,7 +17,10 @@ const Login = (props) => {
             body: JSON.stringify({ email: credentials.email, password: credentials.password }),
         });
         const json = await response.json()
-        // console.log(json); 
+        console.log(json);
+        if (json.errors) {
+            seterror(json.errors)
+        }
         if (json.success) {
             //save the auth token and redirect
             sessionStorage.setItem("token", json.authtoken);
@@ -25,12 +29,10 @@ const Login = (props) => {
         }
         else {
             props.showAlert("Invalid credential", "danger");
-
         }
     }
     const onChange = (e) => {
         setCredentials({ ...credentials, [e.target.name]: e.target.value });
-
     }
     return (
         <>
@@ -65,6 +67,12 @@ const Login = (props) => {
 
                                 <input type="email" className="form-control" id="email" value={credentials.email} name='email' onChange={onChange} aria-describedby="emailHelp" placeholder='Email Address' />
                             </div>
+                            {/* {error.map((err)=>{                                           
+                               
+                                if(err.path=="email") {  return <p style={{color:"red"}}>enter a valid email</p>;  }
+                               }
+                                
+                                )} */}
                             <div className="mb-3">
 
                                 <input type="password" className="form-control" id="password" value={credentials.password} onChange={onChange} name='password' placeholder='Password' />

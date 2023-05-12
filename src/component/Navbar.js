@@ -34,7 +34,37 @@ const Navbar = () => {
                   <li><Link className="dropdown-item" to="/studentlist">Student List</Link></li>                              
                 </ul>
               </li>
+              <li className="nav-item dropdown">
+                <a className="nav-link dropdown-toggle" href="/" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+                  Marksheet
+                </a>
+                <ul className="dropdown-menu">
+                  <li><Link className="dropdown-item" to="/addmarksheet">Addmarksheet</Link></li>
+                  <li><Link className="dropdown-item" to="/marksheetlist">Marksheet List</Link></li>                              
+                </ul>
+              </li>
+              <li className="nav-item dropdown">
+                <a className="nav-link dropdown-toggle" href="/" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+                  College
+                </a>
+                <ul className="dropdown-menu">
+                  <li><Link className="dropdown-item" to="/addcollege">Addcollege</Link></li>
+                  <li><Link className="dropdown-item" to="/collegelist">College List</Link></li>                              
+                </ul>
+              </li>
+              <li className="nav-item dropdown">
+                <a className="nav-link dropdown-toggle" href="/" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+                  Role
+                </a>
+                <ul className="dropdown-menu">
+                  <li><Link className="dropdown-item" to="/addrole">Addrole</Link></li>
+                  <li><Link className="dropdown-item" to="/rolelist">Role List</Link></li>                              
+                </ul>
+              </li>
 
+              <li className="nav-item">
+                <Link className={`nav-link ${location.pathname === "/studentdata"} ? "active":""`} aria-current="page" to="/studentdata">User data</Link>
+              </li>
               <li className="nav-item">
                 <Link className={`nav-link ${location.pathname === "/about"} ? "active":""`} aria-current="page" to="/about">About</Link>
               </li>
