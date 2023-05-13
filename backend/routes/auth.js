@@ -7,35 +7,37 @@ const Regis = require('../models/Regis')
 var jwt = require('jsonwebtoken');
 const JWT_SECRET = 'Deep$123';
 const fetchregis = require("../middleware/fetchregis");
-// const multer =require('multer')
+const multer =require('multer')
 
-// const Storage = multer.diskStorage({
-//     destination:"uploads",
-//     filename: function (req, file, cb) {      
-//       cb(null, Date.now()+file.originalname)
-//     }
-//   })
-// const upload = multer({ storage: Storage })
+const Storage = multer.diskStorage({
+    destination:"uploads",
+    filename: function (req, file, cb) {      
+      cb(null, Date.now()+file.originalname)
+    }
+  })
+const upload = multer({ storage: Storage })
 
-router.post("/register",
-    [body('fname', 'Enter a valid fname').isLength({ min: 1 }),
-    body('lname', 'Enter a valid lname').isLength({ min: 1 }),
-    body('email', 'Enter a valid email').isEmail(),
-    body('password', 'password must be atleast 5 char...').isLength({ min: 5 })],
+router.post("/register",upload.single("image"),
+    // [body('fname', 'Enter a valid fname').isLength({ min: 1 }),
+    // body('lname', 'Enter a valid lname').isLength({ min: 1 }),
+    // body('email', 'Enter a valid email').isEmail(),
+    // body('password', 'password must be atleast 5 char...').isLength({ min: 5 })],
     async (req, res) => {
-             console.log(req.body);
-        // const { fname, lname, email, password } = req.body;
-        // const imageUrl=req.file.path;
-        // if(!fname||lname||!email||!password||!imageUrl){
-        //     return res.send({code:400,msg:"bad request"})
-        // }
+            //  console.log(req.body)
+            //  console.log(req.file)
+        const { fname, lname, email, password } = req.body;
+        const imageUrl=req.file.path;
+        if(!fname||!lname||!email||!password||!imageUrl){
+            return res.send({code:400,msg:"bad request"})
+        }
         // const upload = new Regis({ fname: fname,lname:lname,email:email,password:password,files:imageUrl, })
         // const success= await upload.save();
         // if(success){
         //     res.send(success);
         // }
+
         let success = false;           
-        const { fname, lname, email, password } = req.body;
+      
         const errors = validationResult(req);
         if (!errors.isEmpty()) {
             return res.status(400).json({ success, errors: errors.array() });
@@ -55,7 +57,7 @@ router.post("/register",
                 lname: lname,
                 email: email,
                 password: secPass,
-                file:req.file
+                files:imageUrl
             })
             const data = {
                 regis: {

@@ -18,6 +18,10 @@ const RegistrationSchema = new Schema({
         type: String,
 
     },
+    files: {
+        type: String,
+
+    },
     date: {
         type: Date,
         default: Date.now

@@ -7,7 +7,7 @@ const port = 8989
 connectToMongo();
 app.use(express.json());
 app.use(cors())
-app.use("/",express.static('uploads'))
+app.use("/uploads",express.static('uploads'))
 
 // parse application/x-www-form-urlencoded
 app.use(bodyParser.urlencoded({ extended: false }));
