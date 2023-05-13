@@ -1,7 +1,13 @@
-import React from 'react'
-
+import React ,{useContext,useEffect} from 'react'
+import NoteContext from '../context/noteContext';
 
 const Home = () => {
+  const notecontext = useContext(NoteContext);
+  const { fetchparticularstudent} = notecontext;
+  useEffect(() => {
+  
+    fetchparticularstudent();
+  },[]);
   return (
     <>    
    <div className="container col-xxl-8 px-4 py-5">

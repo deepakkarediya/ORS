@@ -21,7 +21,7 @@ const Addstudent = (props) => {
     return (
     <>
         {sessionStorage.getItem("token")?<div className="container my-3">
-            <h1>Add a Student</h1>
+            <h1>Add Student</h1>
             <form  onSubmit={handleClick} className='my-3'>
                 <div className="mb-3">
                     <label htmlFor="firstname" className="form-label">Firstname</label>
@@ -30,11 +30,11 @@ const Addstudent = (props) => {
                 </div>
                 <div className="mb-3">
                     <label htmlFor="lastname" className="form-label">Lastname</label>
-                    <input type="text" className="form-control" id="lastname" name='lastname' value={addstudent.lastname} onChange={onChange} minLength={2} required />
+                    <input type="text" className="form-control" id="lastname" name='lastname' value={addstudent.lastname} onChange={onChange} minLength={1} required />
                 </div>
                 <div className="mb-3">
                     <label htmlFor="email" className="form-label">Email</label>
-                    <input type="text" className="form-control" id="email" name='email' value={addstudent.email} onChange={onChange} minLength={4} required />
+                    <input type="text" className="form-control" id="email" name='email' value={addstudent.email} onChange={onChange} minLength={1} required />
                 </div>
                 <div className="mb-3">
                     <label htmlFor="mobileNo" className="form-label">MobileNo</label>
@@ -42,10 +42,10 @@ const Addstudent = (props) => {
                 </div>
                 <div className="mb-3">
                     <label htmlFor="collegeId" className="form-label">CollegeId</label>
-                    <input type="text" className="form-control" id="collegeId" name='collegeId' value={addstudent.collegeId} minLength={3} onChange={onChange} required />
+                    <input type="text" className="form-control" id="collegeId" name='collegeId' value={addstudent.collegeId} minLength={2} onChange={onChange} required />
                 </div>
 
-                <button type="submit" disabled={addstudent.firstname.length<5 ||addstudent.lastname.length<5} className="btn btn-primary" >Submit</button>
+                <button type="submit" disabled={addstudent.firstname.length<1 ||addstudent.lastname.length<1} className="btn btn-primary" >Submit</button>
             </form>
         </div>:history.push("/login")}
         </>

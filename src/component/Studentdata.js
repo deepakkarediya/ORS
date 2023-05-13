@@ -13,7 +13,7 @@ const Studentdata = () => {
           else {
             history.push("/login")
           }
-    }, []);
+    }, [fetchstudentDetails,history]);
     return (
         <div>
             <h1>User Data</h1>

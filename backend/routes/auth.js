@@ -3,10 +3,19 @@ const router = express.Router();
 const { body, validationResult } = require('express-validator');
 var bcrypt = require('bcryptjs');
 const Regis = require('../models/Regis')
+
 var jwt = require('jsonwebtoken');
 const JWT_SECRET = 'Deep$123';
 const fetchregis = require("../middleware/fetchregis");
+// const multer =require('multer')
 
+// const Storage = multer.diskStorage({
+//     destination:"uploads",
+//     filename: function (req, file, cb) {      
+//       cb(null, Date.now()+file.originalname)
+//     }
+//   })
+// const upload = multer({ storage: Storage })
 
 router.post("/register",
     [body('fname', 'Enter a valid fname').isLength({ min: 1 }),
@@ -14,31 +23,25 @@ router.post("/register",
     body('email', 'Enter a valid email').isEmail(),
     body('password', 'password must be atleast 5 char...').isLength({ min: 5 })],
     async (req, res) => {
-        let success = false;
-        // let msg=[];
+             console.log(req.body);
+        // const { fname, lname, email, password } = req.body;
+        // const imageUrl=req.file.path;
+        // if(!fname||lname||!email||!password||!imageUrl){
+        //     return res.send({code:400,msg:"bad request"})
+        // }
+        // const upload = new Regis({ fname: fname,lname:lname,email:email,password:password,files:imageUrl, })
+        // const success= await upload.save();
+        // if(success){
+        //     res.send(success);
+        // }
+        let success = false;           
         const { fname, lname, email, password } = req.body;
         const errors = validationResult(req);
         if (!errors.isEmpty()) {
             return res.status(400).json({ success, errors: errors.array() });
         }
         try {
-            // if(req.body.fname===""){
-            //     let msg1={fname:"firstname is required"}
-            //     msg.push(msg1)
-            // }
-            // if(req.body.lname===""){
-            //     let msg2={lname:"lastname is required"}
-            //     msg.push(msg2)
-            // }
-            // if(req.body.email===""){
-            //     let msg3={email:"email is required"}
-            //     msg.push(msg3)
-            // }
-            // if(req.body.password===""){
-            //     let msg4={password:"password is required"}
-            //     msg.push(msg4)
-            // }
-            //  res.json({error:msg});
+         
             let regis = await Regis.findOne({ email: req.body.email });
             if (regis) {
                 return res.status(200).json({ success, error: "email already exists" })
@@ -52,6 +55,7 @@ router.post("/register",
                 lname: lname,
                 email: email,
                 password: secPass,
+                file:req.file
             })
             const data = {
                 regis: {
@@ -125,17 +129,18 @@ router.get('/findall', fetchregis, async (req, res) => {
         res.status(500).send("Internal Server Error");
     }
 })
-// router.post('/getregis', fetchregis, async (req, res) => {
 
-//     try {
-//         const userId = req.regis1.id;
-//         const regis = await Regis.findById(userId).select("-password");
-//         res.send(regis);
-//     } catch (error) {
-//         console.error(error.message);
-//         res.status(500).send("Internal Server Error");
-//     }
-// })
+
+router.post('/getregis', fetchregis, async (req, res) => {
+      try {
+        const userId = req.regis1.id;
+        const regis = await Regis.findById(userId).select("-password");
+        res.send(regis);
+    } catch (error) {
+        console.error(error.message);
+        res.status(500).send("Internal Server Error");
+    }
+})
 
 
 module.exports = router;  

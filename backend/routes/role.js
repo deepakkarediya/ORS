@@ -5,7 +5,7 @@ const fetchregis = require("../middleware/fetchregis");
 const Role= require("../models/Addrole");
 const { body, validationResult } = require('express-validator');
 
-// ROUTE 1: Get All the Notes using: GET "/api/role/fetchcollege". Login required
+// ROUTE 1: Get All the Notes using: GET "/api/role/fetchrole". Login required
 router.get('/fetchrole', fetchregis, async (req, res) => {
     try {
 

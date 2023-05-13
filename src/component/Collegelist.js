@@ -84,7 +84,7 @@ const Collegelist = (props) => {
       </div>
 
       <div>      
-          <table className="table table-success my-5">
+          <table className="table table-success my-5 table-bordered">
           <thead className="table-dark">
             <tr >
               <th scope="col">Id</th>

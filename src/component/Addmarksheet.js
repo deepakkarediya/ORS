@@ -35,7 +35,7 @@ const Addmarksheet = (props) => {
                 </div>
                 <div className="mb-3">
                     <label htmlFor="physics" className="form-label">Physics</label>
-                    <input type="text" className="form-control" id="physics" name='physics' value={addmarksheet.physics} onChange={onChange} minLength={1} required />
+                    <input type="text" className="form-control" id="physics" name='physics' value={addmarksheet.physics} onChange={onChange} minLength={2} required />
                 </div>
                 <div className="mb-3">
                     <label htmlFor="chemistry" className="form-label">Chemistry</label>
