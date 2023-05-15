@@ -1,11 +1,19 @@
-import React, { useContext } from 'react'
+import React, { useContext, useEffect } from 'react'
 import { Link, useLocation, useHistory } from "react-router-dom"
 import NoteContext from '../context/noteContext';
 const Navbar = () => {
   const notecontext = useContext(NoteContext);
-  const { particularstudent } = notecontext;
+  const { particularstudent,fetchparticularstudent } = notecontext;
   let location = useLocation();
   const history = useHistory();
+  
+  useEffect(() => {
+   
+    if(sessionStorage.getItem('token')){
+      fetchparticularstudent();
+    }
+  },[]);
+ 
   const handleLogout = () => {
     sessionStorage.removeItem("token");
     history.push("/login");

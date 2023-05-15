@@ -10,10 +10,11 @@ const fetchregis = require("../middleware/fetchregis");
 const multer =require('multer')
 
 const Storage = multer.diskStorage({
-    destination:"uploads",
+    destination:'backend/uploads' ,
     filename: function (req, file, cb) {      
       cb(null, Date.now()+file.originalname)
     }
+
   })
 const upload = multer({ storage: Storage })
 
@@ -94,12 +95,11 @@ router.post('/login', [
         if (!regis) {
             return res.status(400).json({ errors: " email does not match " });
         }
-
         const passwordCompare = await bcrypt.compare(password, regis.password);
         if (!passwordCompare) {
-
             return res.status(400).json({ errors: "password not match" });
         }
+       
         const data = {
             regis: {
                 id: regis.id

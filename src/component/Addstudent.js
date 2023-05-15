@@ -12,7 +12,7 @@ const Addstudent = (props) => {
         e.preventDefault();
         addStudent(addstudent.firstname, addstudent.lastname, addstudent.email, addstudent.mobileNo, addstudent.collegeId);
         setStudent({ firstname: "", lastname: "", email: "", mobileNo: "", collegeId: "" });
-        props.showAlert("Add note successfully", "success");
+        props.showAlert("Add student successfully", "success");
     }
     const onChange = (e) => {
         setStudent({ ...addstudent, [e.target.name]: e.target.value });
