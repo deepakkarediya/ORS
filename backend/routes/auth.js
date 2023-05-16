@@ -76,20 +76,39 @@ router.post("/register",upload.single("image"),
     })
 
 
-router.post('/login', [
-    body('email', 'Enter a valid email').isEmail(),
-    body('password', 'Password cannot be blank').exists(),
-    // body('password', 'password must be atleast 5 char...').isLength({ min: 5 })
-], async (req, res) => {
+router.post('/login', 
+// [
+//     body('email', 'Enter a valid email').isEmail(),
+//      body('password', 'Password cannot be blank').exists(),
+//     // body('password', 'password must be atleast 5 char...').isLength({ min: 5 })
+// ], 
+async (req, res) => {
+    try {
     let success = false;
 
     // If there are errors, return Bad request and the errors
-    const errors = validationResult(req);
-    if (!errors.isEmpty()) {
-        return res.status(400).json({ success, errors: errors.array() });
-    }
+    // const errors = validationResult(req);
+    // if (!errors.isEmpty()) {
+    //     return res.status(400).json({ success, errors: errors.array() });
+    // }
     const { email, password } = req.body;
-    try {
+    // if(!email){
+    //     return res.status(400).json({ email:"email can't be blank"});
+        
+    // }else if(!password){
+    //     return res.status(400).json({ password:"password can't be blank" });
+
+    //  if(!email || !password){
+    //     if(!email){
+    //         return res.status(400).json({ email:"email can't be blank"});
+    //     }
+    //     if(!password){
+    //         return res.status(400).json({ password:"password can't be blank" });
+    //     }
+    //     return res.status(400).json({ email:"email can't be blank",password:"password can't be blank" });
+    // }
+
+    
 
         let regis = await Regis.findOne({ email: email });
         if (!regis) {

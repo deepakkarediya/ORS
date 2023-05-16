@@ -1,5 +1,9 @@
 import React, { useState} from 'react'
 import { useHistory } from 'react-router-dom';
+import ReactDOM from 'react-dom/client';
+// import Home from './Home'
+import Dashboard from './Dashboard';
+
 
 
 const Login = (props) => {
@@ -18,19 +22,18 @@ const Login = (props) => {
             body: JSON.stringify({ email: credentials.email, password: credentials.password }),
         });
         const json = await response.json()
-        // console.log(json);
-        // if (json.errors) {
-        //     seterror(json.errors)
-        // }
+        console.log(json)
         if (json.success) {
             //save the auth token and redirect
             sessionStorage.setItem("token", json.authtoken);
             props.showAlert("Login successfully", "success");
-            history.push("/")
+             history.push("/")
+            // const root = ReactDOM.createRoot(document.getElementById('root'));
+            // root.render(<Dashboard />);
             
         }
         else {
-            props.showAlert("Invalid credential", "danger");
+            props.showAlert(`Invalid credential || ${json.errors}`, "danger");
         }
     }
     const onChange = (e) => {

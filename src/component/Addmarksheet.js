@@ -13,7 +13,7 @@ const Addmarksheet = (props) => {
     e.preventDefault();
     addMarksheet(addmarksheet.name, addmarksheet.rollno, addmarksheet.physics, addmarksheet.chemistry, addmarksheet.maths);
     setMarksheet({  name: "", rollno: "", physics: "", chemistry: "", maths: "" });
-    props.showAlert("Add Marksheet successfully", "success");
+    //props.showAlert("Add Marksheet successfully", "success");
 }
   const onChange = (e) => {
     setMarksheet({ ...addmarksheet, [e.target.name]: e.target.value });

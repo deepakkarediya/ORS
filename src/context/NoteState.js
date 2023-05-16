@@ -61,6 +61,13 @@ const NoteState = (props) => {
 
     const addstudent = await response.json();
     console.log(addstudent)
+    if(addstudent.success){
+
+      props.showAlert("Add student successfully", "success");
+    }
+    if(addstudent.error){
+      props.showAlert(addstudent.error, "danger");
+    }
     setStudentData(studentdata.concat(addstudent));
   };
 
@@ -76,6 +83,7 @@ const NoteState = (props) => {
     });
     const json = await response.json();
     console.log(json);
+
     setStudentData(json);
   };
 
@@ -146,6 +154,13 @@ const NoteState = (props) => {
 
     const addmarksheet = await response.json();
     console.log(addmarksheet)
+    if(addmarksheet.success){
+
+      props.showAlert("Add marksheet successfully", "success");
+    }
+    if(addmarksheet.error){
+      props.showAlert(addmarksheet.error, "danger");
+    }
     setMarksheet(marksheet.concat(addmarksheet));
   };
 
@@ -231,6 +246,13 @@ const NoteState = (props) => {
 
     const addcollege = await response.json();
     console.log(addcollege)
+    if(addcollege.success){
+
+      props.showAlert("Add college successfully", "success");
+    }
+    if(addcollege.error){
+      props.showAlert(addcollege.error, "danger");
+    }
     setCollege(college.concat(addcollege));
   };
 
@@ -313,6 +335,13 @@ const NoteState = (props) => {
 
     const addrole = await response.json();
     console.log(addrole)
+    if(addrole.success){
+
+      props.showAlert("Add role successfully", "success");
+    }
+    if(addrole.error){
+      props.showAlert(addrole.error, "danger");
+    }
     setRole(role.concat(addrole));
   };
 

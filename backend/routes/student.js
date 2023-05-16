@@ -25,13 +25,14 @@ router.post('/addstudent', fetchregis, [
     body('mobileNo', 'mobileno must be atleast 10 char...').isLength({ min: 10 }),
     body('collegeId', 'Enter a valid collegeId').isLength({ min: 3 })],
     async (req, res) => {
+        let success=false;
 
         try {
             const { firstname,lastname,email,mobileNo,collegeId } = req.body;
             // If there are errors, return Bad request and the errors
             const errors = validationResult(req);
             if (!errors.isEmpty()) {
-                return res.status(400).json({ errors: errors.array() });
+                return res.status(400).json({success, error: errors.array() });
             }
 
             const student = new Student({
@@ -44,7 +45,8 @@ router.post('/addstudent', fetchregis, [
                 
             })
             const savedStundent = await student.save();
-            res.json(savedStundent)
+            success=true;
+            res.json({success,savedStundent})
         } catch (error) {
             console.error(error.message);
             res.status(500).send("Internal Server Error");

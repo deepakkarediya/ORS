@@ -9,13 +9,15 @@ const Studentlist = (props) => {
   const { studentdata, fetchStudent, deleteStudent, updateStudent } = notecontext;
   const [addstudent, setStudent] = useState({ id: "", Ufirstname: "", Ulastname: "", Uemail: "", UmobileNo: "", UcollegeId: "" });
   useEffect(() => {
-    if (sessionStorage.getItem("token")) {
-      fetchStudent();
-    }
+     if(sessionStorage.getItem('token')){
+
+       fetchStudent();
+     }
+    
     else {
       history.push("/login")
     }
-    // eslint-disable-next-line
+    //eslint-disable-next-line
   }, []);
   const ref = useRef(null);
   const refclose = useRef(null);

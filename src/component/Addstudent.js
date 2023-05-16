@@ -8,11 +8,11 @@ const Addstudent = (props) => {
     const { addStudent } = notecontext;
     const [addstudent, setStudent] = useState({ firstname: "", lastname: "", email: "", mobileNo: "", collegeId: "" });
 
-    const handleClick = (e) => {
+    const handleClick = async (e) => {
         e.preventDefault();
-        addStudent(addstudent.firstname, addstudent.lastname, addstudent.email, addstudent.mobileNo, addstudent.collegeId);
+        await addStudent(addstudent.firstname, addstudent.lastname, addstudent.email, addstudent.mobileNo, addstudent.collegeId);
         setStudent({ firstname: "", lastname: "", email: "", mobileNo: "", collegeId: "" });
-        props.showAlert("Add student successfully", "success");
+        // props.showAlert("Add student successfully", "success");
     }
     const onChange = (e) => {
         setStudent({ ...addstudent, [e.target.name]: e.target.value });

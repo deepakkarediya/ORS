@@ -27,11 +27,12 @@ router.post('/addcollege', fetchregis, [
     async (req, res) => {
 
         try {
+            let success=false;
             const { collegename,address,city,state,mobileno } = req.body;
             // If there are errors, return Bad request and the errors
             const errors = validationResult(req);
             if (!errors.isEmpty()) {
-                return res.status(400).json({ errors: errors.array() });
+                return res.status(400).json({ success,error: errors.array() });
             }
 
             const college = new College({
@@ -43,7 +44,8 @@ router.post('/addcollege', fetchregis, [
                 mobileno                         
                    })
             const savedCollege = await college.save();
-            res.json(savedCollege)
+            success=true;
+            res.json({success,savedCollege})
         } catch (error) {
             console.error(error.message);
             res.status(500).send("Internal Server Error");

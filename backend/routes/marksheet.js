@@ -25,13 +25,13 @@ router.post('/addmarksheet', fetchregis, [
     body('chemistry', 'Enter a valid chemistry no').isLength({ min:1 }),
     body('maths', 'Enter a valid maths no').isLength({ min: 1 })],
     async (req, res) => {
-
+        let success=false;
         try {
             const { name,rollno,physics,chemistry,maths } = req.body;
             // If there are errors, return Bad request and the errors
             const errors = validationResult(req);
             if (!errors.isEmpty()) {
-                return res.status(400).json({ errors: errors.array() });
+                return res.status(400).json({success, error: errors.array() });
             }
             const marksheet = new Marksheet({
                 regis: req.regis1.id,
@@ -42,7 +42,7 @@ router.post('/addmarksheet', fetchregis, [
                 maths                            
             })
             const savedMarksheet = await marksheet.save();
-            res.json(savedMarksheet)
+            res.json({success,savedMarksheet})
         } catch (error) {
             console.error(error.message);
             res.status(500).send("Internal Server Error");
@@ -86,7 +86,8 @@ router.delete('/deletemarksheet/:id', fetchregis, async (req, res) => {
         }
 
         marksheet = await Marksheet.findByIdAndDelete(req.params.id)
-        res.json({ Success: "student has been deleted", marksheet: marksheet });
+        success=true;
+        res.json({success, msg: "student has been deleted", marksheet: marksheet });
     } catch (error) {
         console.error(error.message);
         res.status(500).send("Internal Server Error");
