@@ -10,14 +10,20 @@ const NoteState = (props) => {
   const initialcollegedata = [];
   const initialroledata = [];
   const initialparticularstudent = [];
+
   const [studentdata, setStudentData] = useState(initialStudentData);
   const [marksheet, setMarksheet] = useState(initialmarksheetdata);
   const [college, setCollege] = useState(initialcollegedata);
   const [role, setRole] = useState(initialroledata);
 
 
-  const [studentdatas, setStudentdata] = useState(StudentData);
+  const [studentdatas, setStudentdatas] = useState(StudentData);
   const [particularstudent, setParticularStudent] = useState(initialparticularstudent);
+  
+
+  const [currentPage, setCurrentPage] = useState(1);
+  const [totalPages, setTotalPages] = useState(1);
+
   //fetch student
   const fetchstudentDetails = async () => {
 
@@ -29,8 +35,8 @@ const NoteState = (props) => {
       },
     });
     const json = await response.json();
-    console.log(json);
-    setStudentdata(json);
+    //console.log(json);
+    setStudentdatas(json);
   }
 
   
@@ -71,21 +77,36 @@ const NoteState = (props) => {
     setStudentData(studentdata.concat(addstudent));
   };
 
-  //fetch student
-  const fetchStudent = async () => {
+  const handlePageChange = async (newPage) => {
+   
+    if (newPage >= 1 && newPage <= totalPages) {
+      setCurrentPage(newPage);    
+    }  
+  };
 
-    const response = await fetch(`${host}/api/student/fetchstudent`, {
+  //fetch student
+  const fetchStudent = async (currentPage) => {   
+ try{
+    const response = await fetch(`${host}/api/student/fetchstudent/?page=${currentPage}`, {
       method: "GET",
       headers: {
         "Content-Type": "application/json",
         "auth-token": sessionStorage.getItem("token"),
       }
+   
     });
     const json = await response.json();
     console.log(json);
+    setStudentData(json.student);
+    setCurrentPage(json.page);
+    setTotalPages(json.totalPages)
 
-    setStudentData(json);
-  };
+
+  } catch (error) {
+    console.error('Error fetching student data:', error);
+  }
+}
+
 
   //Delete note
   const deleteStudent = async (id) => {
@@ -406,7 +427,7 @@ const NoteState = (props) => {
 
   return (
     <NoteContext.Provider value={{
-      fetchstudentDetails, studentdatas, addStudent, fetchStudent, studentdata, deleteStudent, updateStudent,
+      fetchstudentDetails, studentdatas, addStudent, fetchStudent, studentdata,currentPage,totalPages, handlePageChange,deleteStudent, updateStudent,
       addMarksheet, marksheet, fetchMarksheet, deleteMarksheet, updateMarksheet
       , addCollege, college, fetchCollege, deleteCollege, updateCollege,
       addRole, role, fetchRole, updateRole, deleteRole,

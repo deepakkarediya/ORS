@@ -22,7 +22,7 @@ const Home = () => {
       <div className="col-10 col-sm-8 col-lg-6">
       {
         sessionStorage.getItem('token')?
-         <img src={`http://localhost:8989/${particularstudent.files}`} className="d-block mx-lg-auto img-fluid rounded-circle" alt="Bootstrap Themes"  loading="lazy"/>
+         <img src={`http://localhost:8989/backend/${particularstudent.files}`} className="d-block mx-lg-auto img-fluid rounded-circle" alt="Bootstrap Themes"  loading="lazy"/>
         : <img src="https://source.unsplash.com/1200x900/?books" className="d-block mx-lg-auto img-fluid" alt="" width="700" height="500" loading="lazy"/>
       }
       </div>

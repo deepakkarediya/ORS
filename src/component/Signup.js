@@ -23,6 +23,7 @@ const Signup = (props) => {
      formData.append("email", email)
      formData.append("password", password)
     formData.append("image", image)
+   
     
     axios.post("http://localhost:8989/api/auth/register",formData,
       {

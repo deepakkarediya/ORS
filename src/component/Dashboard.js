@@ -52,7 +52,7 @@ const Dashboard = () => {
                             <Route exact path="/collegelist"><Collegelist showAlert={showAlert} /></Route>
 
                             <Route exact path="/addrole"><Addrole showAlert={showAlert} /></Route>
-                            <Route exact path="/rolelist"><Rolelist showAlert={showAlert} /></Route> */}
+                            <Route exact path="/rolelist"><Rolelist showAlert={showAlert} /></Route> 
                         </Switch>
                     </div>
                 </Router>

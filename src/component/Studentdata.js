@@ -34,7 +34,7 @@ const Studentdata = () => {
                     {studentdatas.map((data, i) => {
                         return <tr key={i}>
                             <td>{i + 1}</td>
-                            <td><img src={`http://localhost:8989/${data.files}`} className="d-block mx-lg-auto img-fluid rounded-circle" alt="Bootstrap Themes" width="40" height="40" loading="lazy"/></td>
+                            <td><img src={`http://localhost:8989/backend/${data.files}`} className="d-block mx-lg-auto img-fluid rounded-circle" alt="Bootstrap Themes" width="40" height="40" loading="lazy"/></td>
                             <td>{data.fname}</td>
                             <td>{data.lname}</td>
                             <td>{data.email}</td>

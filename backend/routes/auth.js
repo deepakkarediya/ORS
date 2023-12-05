@@ -1,6 +1,6 @@
 const express = require('express');
 const router = express.Router();
-const { body, validationResult } = require('express-validator');
+//const { body, validationResult } = require('express-validator');
 var bcrypt = require('bcryptjs');
 const Regis = require('../models/Regis')
 
@@ -10,7 +10,7 @@ const fetchregis = require("../middleware/fetchregis");
 const multer =require('multer')
 
 const Storage = multer.diskStorage({
-    destination:'backend/uploads' ,
+    destination:'uploads' ,
     filename: function (req, file, cb) {      
       cb(null, Date.now()+file.originalname)
     }
@@ -27,10 +27,11 @@ router.post("/register",upload.single("image"),
             //  console.log(req.body)
             //  console.log(req.file)
         const { fname, lname, email, password } = req.body;
+        //console.log(req.body);
         const imageUrl=req.file.path;
-        if(!fname||!lname||!email||!password||!imageUrl){
-            return res.send({code:400,msg:"bad request"})
-        }
+        // if(!fname||!lname||!email||!password||!imageUrl){
+        //     return res.send({code:400,msg:"bad request"})
+        // }
         // const upload = new Regis({ fname: fname,lname:lname,email:email,password:password,files:imageUrl, })
         // const success= await upload.save();
         // if(success){
@@ -39,10 +40,10 @@ router.post("/register",upload.single("image"),
 
         let success = false;           
       
-        const errors = validationResult(req);
-        if (!errors.isEmpty()) {
-            return res.status(400).json({ success, errors: errors.array() });
-        }
+        // const errors = validationResult(req);
+        // if (!errors.isEmpty()) {
+        //     return res.status(400).json({ success, errors: errors.array() });
+        // }
         try {
          
             let regis = await Regis.findOne({ email: req.body.email });
@@ -108,9 +109,7 @@ async (req, res) => {
     //     return res.status(400).json({ email:"email can't be blank",password:"password can't be blank" });
     // }
 
-    
-
-        let regis = await Regis.findOne({ email: email });
+            let regis = await Regis.findOne({ email: email });
         if (!regis) {
             return res.status(400).json({ errors: " email does not match " });
         }
@@ -133,13 +132,7 @@ async (req, res) => {
         console.error(error.message);
         res.status(500).send("Internal Server Error");
     }
-
-
 })
-
-
-
-
 router.get('/findall', fetchregis, async (req, res) => {
 
     try {

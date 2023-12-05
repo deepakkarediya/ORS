@@ -1,8 +1,8 @@
 import React, { useState} from 'react'
 import { useHistory } from 'react-router-dom';
-import ReactDOM from 'react-dom/client';
+//import ReactDOM from 'react-dom/client';
 // import Home from './Home'
-import Dashboard from './Dashboard';
+//import Dashboard from './Dashboard';
 
 
 
@@ -61,7 +61,7 @@ const Login = (props) => {
                 <div className="row align-items-center g-lg-5 py-1">
                     <div className="col-lg-7 text-center text-lg-start">
                         <h1 className="display-4 fw-bold lh-1 text-body-emphasis mb-3">Login Here</h1>
-                        <p className="col-lg-10 fs-4">Please try to login with correct credentials</p>
+                        {/* <p className="col-lg-10 fs-4">Please try to login with correct credentials</p> */}
                     </div>
                     <div className="col-md-10 mx-auto col-lg-5">
                         <form className="p-4 p-md-5 border rounded-3 bg-body-tertiary" onSubmit={handleSubmit}>
